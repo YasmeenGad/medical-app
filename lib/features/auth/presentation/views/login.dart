@@ -19,6 +19,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: MyColors.whiteColor,
         appBar: AppBar(
           elevation: 0,
           // Remove AppBar shadow
