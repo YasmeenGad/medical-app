@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medical_app/core/styles/colors/my_colors.dart';
+import 'package:medical_app/core/utils/extension/navigation.dart';
 import 'package:medical_app/features/auth/presentation/widgets/custom_text_field.dart';
 
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/widgets/buttons/custom_button.dart';
 
 class CustomLogin extends StatelessWidget {
@@ -28,7 +30,12 @@ class CustomLogin extends StatelessWidget {
               padding: EdgeInsets.only(top: 58.h),
               child: Align(
                 alignment: Alignment.center,
-                child: const CustomButton(),
+                child: CustomButton(
+                  text: "Login",
+                  onTap: () {
+                    context.pushNamed(AppRoutes.home);
+                  },
+                ),
               ),
             )
           ],
