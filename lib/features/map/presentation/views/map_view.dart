@@ -16,13 +16,12 @@ class MapView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 20.0, right: 20.0, top: 40.0, bottom: 8.0),
-              child: Row(children: [
-                Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                spacing: 16,
+                children: [
+                  Row(children: [
+                    Expanded(
+                      child: Row(
                         children: [
                           GestureDetector(
                               onTap: () {
@@ -33,25 +32,34 @@ class MapView extends StatelessWidget {
                                 color: MyColors.darkBlue,
                                 size: 30.sp,
                               )),
+                          Icon(
+                            Icons.location_on_outlined,
+                            color: MyColors.darkBlue,
+                            size: 30.sp,
+                          ),
                         ],
                       ),
-                      Icon(
-                        Icons.location_on_outlined,
-                        color: MyColors.darkBlue,
-                        size: 30.sp,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                    flex: 3,
-                    child: Column(
-                      children: [
-                        CustomSearchContainer(),
-                        CustomSearchContainer(),
-                      ],
-                    )),
-              ]),
+                    ),
+                    Expanded(
+                        flex: 3,
+                        child: CustomSearchContainer(
+                          borderColor: MyColors.darkBlue!,
+                          hintText: "Current location",
+                        )),
+                  ]),
+                  Row(children: [
+                    Expanded(
+                      child: SizedBox(),
+                    ),
+                    Expanded(
+                        flex: 3,
+                        child: CustomSearchContainer(
+                          borderColor: MyColors.grey,
+                          hintText: "enter your location",
+                        )),
+                  ]),
+                ],
+              ),
             ),
           )
         ],
