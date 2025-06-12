@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medical_app/core/styles/colors/my_colors.dart';
 import 'package:medical_app/features/auth/presentation/widgets/custom_text_field.dart';
 
+import '../../../../core/utils/widgets/buttons/custom_button.dart';
+
 class CustomLogin extends StatelessWidget {
   const CustomLogin({super.key});
 
@@ -10,7 +12,7 @@ class CustomLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.7,
+      height: MediaQuery.sizeOf(context).height,
       child: Padding(
         padding: EdgeInsets.all(20.r),
         child: Column(
@@ -22,6 +24,13 @@ class CustomLogin extends StatelessWidget {
               text: "user name",
             ),
             CustomTextField(text: "password"),
+            Padding(
+              padding: EdgeInsets.only(top: 58.h),
+              child: Align(
+                alignment: Alignment.center,
+                child: const CustomButton(),
+              ),
+            )
           ],
         ),
       ),
