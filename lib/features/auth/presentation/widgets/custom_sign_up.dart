@@ -12,6 +12,7 @@ class CustomSignUp extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        backgroundColor: MyColors.whiteColor,
         appBar: TabBar(
           indicatorColor: MyColors.primaryColor,
           labelColor: MyColors.primaryColor,
