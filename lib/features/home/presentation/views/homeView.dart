@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medical_app/core/routes/app_routes.dart';
 import 'package:medical_app/core/styles/colors/my_colors.dart';
+import 'package:medical_app/core/utils/extension/navigation.dart';
 import 'package:medical_app/features/home/presentation/widgets/custom_chip.dart';
+import 'package:medical_app/features/home/presentation/widgets/custome_filtered_product.dart';
 
 import '../widgets/custom_home_app_bar.dart';
 import '../widgets/custom_product_item.dart';
@@ -60,7 +63,11 @@ class _HomeViewState extends State<HomeView> {
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) => const ProductItem(),
+                  (context, index) => GestureDetector(
+                      onTap: () {
+                        context.pushNamed(AppRoutes.doctorDetails);
+                      },
+                      child: const CustomFilteredProduct()),
                   childCount: filteredItems.length,
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

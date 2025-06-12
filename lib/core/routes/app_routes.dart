@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medical_app/features/home/presentation/views/doctor_details_view.dart';
 import 'package:medical_app/features/home/presentation/views/homeView.dart';
 import 'package:medical_app/features/map/presentation/views/map_view.dart';
 
@@ -10,6 +11,7 @@ class AppRoutes {
   static const String login = '/';
   static const String home = "home";
   static const String map = "map";
+  static const String doctorDetails = 'doctorDetails';
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -25,6 +27,10 @@ class AppRoutes {
       case AppRoutes.map:
         return BaseRoute(
           page: const MapView(),
+        );
+      case AppRoutes.doctorDetails:
+        return BaseRoute(
+          page: const DoctorDetailsView(),
         );
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
