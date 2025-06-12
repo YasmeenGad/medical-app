@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medical_app/core/styles/colors/my_colors.dart';
+import 'package:medical_app/core/utils/extension/media_query_values.dart';
 import 'package:provider/provider.dart';
 
 import '../viewModel/map_view_model.dart';
@@ -17,37 +19,52 @@ class MapView extends StatelessWidget {
         backgroundColor: MyColors.whiteColor,
         body: Consumer<MapViewModel>(
           builder: (context, viewModel, child) {
-            final currentLocation = viewModel.currentLocation;
-            return Stack(
+            final location = viewModel.currentLatLng;
+
+            return Column(
               children: [
-                if (currentLocation != null)
-                  GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      target: currentLocation,
-                      zoom: 15,
+                const CustomMapAppBar(),
+                Padding(
+                  padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 60.h),
+                  child: SizedBox(
+                    height: context.height * 0.4,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (location != null)
+                          FlutterMap(
+                            options: MapOptions(
+                              initialCenter: location,
+                              initialZoom: 15,
+                            ),
+                            children: [
+                              TileLayer(
+                                urlTemplate:
+                                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                subdomains: const ['a', 'b', 'c'],
+                              ),
+                              MarkerLayer(
+                                markers: [
+                                  Marker(
+                                    width: 60.w,
+                                    height: 60.h,
+                                    point: location,
+                                    child: Icon(
+                                      Icons.location_on,
+                                      color: MyColors.darkBlue,
+                                      size: 40,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        if (location == null)
+                          const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                      ],
                     ),
-                    myLocationEnabled: true,
-                    myLocationButtonEnabled: false,
-                    onMapCreated: viewModel.setMapController,
-                  )
-                else
-                  Center(
-                      child: CircularProgressIndicator(
-                    color: MyColors.darkBlue!,
-                  )),
-                const Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: CustomMapAppBar(),
-                ),
-                Positioned(
-                  bottom: 30,
-                  right: 20,
-                  child: FloatingActionButton.small(
-                    backgroundColor: Colors.white,
-                    onPressed: viewModel.goToCurrentLocation,
-                    child: const Icon(Icons.my_location, color: Colors.black),
                   ),
                 ),
               ],

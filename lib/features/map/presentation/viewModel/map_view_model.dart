@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 
 class MapViewModel extends ChangeNotifier {
-  GoogleMapController? _mapController;
-  LatLng? _currentLocation;
+  LatLng? _currentLatLng;
 
-  LatLng? get currentLocation => _currentLocation;
-
-  void setMapController(GoogleMapController controller) {
-    _mapController = controller;
-  }
+  LatLng? get currentLatLng => _currentLatLng;
 
   Future<void> fetchCurrentLocation() async {
     final location = Location();
     final permission = await location.requestPermission();
     if (permission == PermissionStatus.granted) {
       final locData = await location.getLocation();
-      _currentLocation = LatLng(locData.latitude!, locData.longitude!);
+      _currentLatLng = LatLng(locData.latitude!, locData.longitude!);
       notifyListeners();
-    }
-  }
 
-  void goToCurrentLocation() {
-    if (_mapController != null && _currentLocation != null) {
-      _mapController!.animateCamera(
-        CameraUpdate.newLatLng(_currentLocation!),
-      );
+      location.onLocationChanged.listen((newLoc) {
+        _currentLatLng = LatLng(newLoc.latitude!, newLoc.longitude!);
+        notifyListeners();
+      });
     }
   }
 }
