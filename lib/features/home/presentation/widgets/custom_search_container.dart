@@ -5,9 +5,12 @@ import '../../../../core/styles/colors/my_colors.dart';
 
 class CustomSearchContainer extends StatelessWidget {
   const CustomSearchContainer(
-      {super.key, required this.borderColor, required this.hintText});
+      {super.key,
+      required this.borderColor,
+      required this.hintText,
+      required this.hintTextColor});
 
-  final Color borderColor;
+  final Color borderColor, hintTextColor;
 
   final String hintText;
 
@@ -23,7 +26,7 @@ class CustomSearchContainer extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: EdgeInsets.only(left: 20.w),
-          hintStyle: TextStyle(color: MyColors.grey),
+          hintStyle: TextStyle(color: hintTextColor),
           hintText: hintText,
         ),
       ),

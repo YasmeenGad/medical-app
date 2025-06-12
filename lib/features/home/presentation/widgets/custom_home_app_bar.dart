@@ -42,7 +42,9 @@ class CustomHomeAppBar extends StatelessWidget {
             flex: 3,
             child: const CustomSearchContainer(
               borderColor: MyColors.grey,
-              hintText: "doctor/pharmacy/hospital...",),
+              hintText: "doctor/pharmacy/hospital...",
+              hintTextColor: MyColors.grey,
+            ),
           )
         ],
       ),
