@@ -7,4 +7,5 @@ class MyColors {
   static const Color primaryColor = Colors.blue;
   static var darkBlue = Colors.blue[900];
   static const Color whiteColor = Colors.white;
+  static const Color grey = Colors.grey;
 }
