@@ -20,7 +20,6 @@ class MapView extends StatelessWidget {
         body: Consumer<MapViewModel>(
           builder: (context, viewModel, child) {
             final location = viewModel.currentLatLng;
-
             return Column(
               children: [
                 const CustomMapAppBar(),
